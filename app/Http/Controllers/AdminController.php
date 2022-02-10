@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use \App\Models;
 use Illuminate\Http\Request;
-use \App\Brands;
+use \App\Models\Brands;
 class AdminController extends Controller
 {
     //
@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function add_brand(Request $req)
     {
      $name=$req->name;
-     $brand=new Brands();
+     $brand= new Brands();
      $brand->name=$name;
      $brand->save();
      return back()->with('message','brand added succesfulley');
