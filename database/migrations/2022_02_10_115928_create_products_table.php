@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->interger('cat_id');
-            $table->interger('sub_categot_id');
+            $table->integer('cat_id');
+            $table->integer('sub_categot_id');
             $table->string('name');
-            $table->interger('brand_id');
+            $table->integer('brand_id');
             $table->float('price');
             $table->timestamps();
         });
