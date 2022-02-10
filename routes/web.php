@@ -21,3 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin','AdminController@index')->name('admin');
+Route::get('/add/brand','AdminController@brand');
+Route::post('/add_brand','AdminController@add_brand')->name('brand');
