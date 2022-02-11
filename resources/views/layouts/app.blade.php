@@ -77,14 +77,14 @@
                         @endguest
                     </ul>
                     <div class="dropdown">
-                        <button type="button" class="btn btn-info" data-toggle="dropdown">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
+                        <button type="button" class="btn btn-info" data-toggle="dropdownn">
+                            <a href="{{ route('cart') }}" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger" id='count'>{{ count((array) session('cart')) }}</span></a>
                         </button>
                         {{-- {{ count((array) session('cart')) }} --}}
                         <div class="dropdown-menu">
                             <div class="row total-header-section">
                                 <div class="col-lg-6 col-sm-6 col-6">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span  class="badge badge-pill badge-danger" >{{ count((array) session('cart')) }}</span>
                                 </div>
                                 @php $total = 0 @endphp
                                 @foreach((array) session('cart') as $id => $details)
@@ -109,7 +109,7 @@
                             @endif
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
-                                    <a href="{{ route('cart') }}" class="btn btn-primary btn-block">View all</a>
+                                    {{-- <a href="{{ route('cart') }}" class="btn btn-primary btn-block">View all</a> --}}
                                 </div>
                             </div>
                         </div>

@@ -15,7 +15,8 @@
                     {{-- <p>{{ $product->id }}</p> --}}
                     <p><strong>Price: </strong> {{ $product->price }}$</p>
                     <input id="product" value="{{ $product->id}}"type="hidden"/>
-                    <p class="btn-holder"><a delid="{{$product->id}}" quan="{{$product->id}}" href="" class="btn btn-warning btn-block text-center dd" data-id="{{ $product->id }}"role="button">Add to cart</a> </p>
+                    {{-- <p class="btn-holder"><a delid="{{$product->id}}" quan="{{$product->id}}" href="" class="btn btn-warning btn-block text-center dd" data-id="{{ $product->id }}"role="button">Add to cart</a> </p> --}}
+                    <a href="javascript:" delid="{{$product->id}}" class="add-card"><i class="flaticon-bag" ><span>ADD TO CART</span></i></a>
                 </div>
             </div>
             </a>
@@ -48,6 +49,39 @@ $(document).ready(function(){
             }
         });
     });
+      $(document).on('click','.add-card',function(e){
+        e.preventDefault();
+        var id=$(this).attr('delid');
+        //alert(id);
+        addtocart(id);
+        });
+    function addtocart(id){
+    if(id != ""){
+        $.ajaxSetup({
+      headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+        $.ajax({
+            url:'{{ route('add.to.cart')}}',
+            type:'POST',
+            dataType:'json',
+            data:{
+                'id' : id
+            },
+
+            success: function(data) {
+                //alert(data);
+                $('#count').html(data.count);
+                //location.reload();
+            }
+        });
+    } else {
+        return false;
+    }
+
+    return false;
+}
 })
 </script>
 @endsection

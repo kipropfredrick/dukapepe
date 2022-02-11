@@ -47,6 +47,15 @@ class HomeController extends Controller
         //return $products;
         return view('welcome',compact('category'));
     }
+    public function adtocart(){
+        $id = $_POST['id'];
+        $cart_data=$this->Cart->get_cart($id);
+        $cart_data = json_decode( json_encode($cart_data), true);
+         $data = array('id' => $id,'qty' => 1,'price' => $cart_data[0]["price"],'name' => $cart_data[0]["name"],'title' => $cart_data[0]["name"],'image'=> $cart_data[0]["image"],'code'    => $cart_data[0]["code"],'description'=> $cart_data[0]["description"],);$cart_row = $this->cart->insert($data);
+            $cart = array_values($this->cart->contents($cart_row));
+        $data = array('status' => 'Success','count'=>$this->cart->total_items(),);
+        echo json_encode($data);
+        }
     public function addToCart(Request $request)
     {
 
@@ -54,20 +63,22 @@ class HomeController extends Controller
         $product = Products::findOrFail($id);
 
         $cart = session()->get('cart', []);
-
+       // $cart= json_decode( json_encode($cart), true);
         if(isset($cart[$id])) {
-            return  $cart[$id]['quantity']++;
+            //return  $cart[$id]['quantity']++;
+           echo json_encode($cart[$id]['quantity']++);
         } else {
             $cart[$id] = [
                 "name" => $product->name,
                 "quantity" => 1,
                 "price" => $product->price,
-                "prod_id" => $product->id
+                "prod_id" => $product->id,
             ];
-        }
 
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+        $data = array('cart'=>$cart,'count'=>count($cart),);
+        session()->put($data);
+        echo json_encode($data);//return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
     public function cart(){
         return view('cart');
