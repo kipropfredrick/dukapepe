@@ -9,7 +9,7 @@ use Sub_Category;
 class Category extends Model
 {
     use HasFactory;
-    
+    protected $fillable=['name','slug'];
     public function subcategories(){
         return $this->hasMany(Sub_Category::class,'category_id');
     }
