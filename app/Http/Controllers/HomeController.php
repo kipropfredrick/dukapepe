@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Orders;
@@ -31,15 +32,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $order=OrderItem::with('order')->get();
+        return view('home',compact('order'));
     }
     public function products($id)
     {
 
         $products=Products::where('cat_id',$id)->get();
-        //$products=User::get();
+        $brands=Brands::get();
         //return $products;
-        return view('products',compact('products'));
+        return view('products',compact('products','brands'));
+    }
+    public function productsbr($id)
+    {
+
+        $products=Products::where('brand_id',$id)->get();
+        $brands=Brands::get();
+        //return $products;
+        return view('products',compact('products','brands'));
     }
     public function categories()
     {

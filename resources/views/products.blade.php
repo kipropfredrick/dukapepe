@@ -1,8 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="class-md-12">
-    <p align="center" style="color:red">Products</p>
+<div class="row">
+    <div class="class-md-6" style="margin-lext: -100px;">
+        <p align="left" style="color:red">Brands</p>
+        @foreach ($brands as $br)
+        <a href="/productsbr/{{$br->id}}" align="center">{{$br->name}}</a>
+        @endforeach
+    </div>
+    <div class="class-md-6">
+        <p align="center" style="color:red">Products</p>
+    </div>
 </div>
 <div class="row">
     @foreach($products as $product)

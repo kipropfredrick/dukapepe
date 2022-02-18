@@ -34,5 +34,6 @@ Route::get('saveorder', 'HomeController@saveorder')->name('saveorder');
 Route::get('/sub/cat/{id}', 'AdminController@subcat')->name('subcat');
 Route::get('products', 'AdminController@products')->name('products');
 Route::post('produc', 'AdminController@addpro')->name('produc');
+Route::get('productsbr/{id}', 'HomeController@productsbr')->name('productsbr');
 
 
